@@ -1,0 +1,41 @@
+version: '2'
+services:
+  php:
+    container_name: php_net
+    volumes:
+      - ./app:/app
+      - ./docker_data/php/init.sh:/app/init.sh
+    build: ./docker_data/php/
+    links:
+      - db
+  db:
+    container_name: db_net
+    build: ./docker_data/mysql
+    volumes:
+      - ./docker_data/mysql/db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: aptito
+      MYSQL_DATABASE: aptito_current
+  nginx:
+    build: ./docker_data/nginx
+    container_name: nginx_net
+    ports:
+      - "80:80"
+    volumes:
+      - ./app:/app
+    links:
+      - php
+      - db
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
+    links:
+      - php
+      - db

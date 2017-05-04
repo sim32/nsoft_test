@@ -1,0 +1,6 @@
+{
+    "name": "root/app",
+    "require": {
+        "klein/klein": "^2.1"
+    }
+}

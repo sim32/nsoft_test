@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><?=$this->title ?></title>
+
+    <!-- Bootstrap -->
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-5"><h4>By menu items</h4></div>
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-5">
+            <div class="input-group input-daterange">
+                <input type="text" class="form-control" id="dateFrom">
+                <div class="input-group-addon">to</div>
+                <input type="text" class="form-control" id="dateTo">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-warning" style="display: none" id="alertDateEmpty">Даты не заполнены или заполнены не верно. Подставлена текущая дата</div>
+        </div>
+
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr class="warning">
+            <th class="sortItem" data-sort="name">Item</th>
+            <th class="sortItem" data-sort="qty">Amount</th>
+            <th class="sortItem" data-sort="price">Gross Sales</th>
+            <th class="sortItem" data-sort="tax">Tax</th>
+            <th class="sortItem" data-sort="total">Net Sales</th>
+        </tr>
+        </thead>
+        <tbody id="tableBody">
+
+        </tbody>
+    </table>
+
+</div>
+<template id="templateRow">
+    <tr>
+        <td>{{ name }}</td>
+        <td>{{ qty }}</td>
+        <td>{{ price.toLocaleString('en', { style: 'currency', currency: 'USD' }) }}</td>
+        <td>{{ tax.toLocaleString('en', { style: 'currency', currency: 'USD' }) }}</td>
+        <td class="active">{{ total.toLocaleString('en', { style: 'currency', currency: 'USD' }) }}</td>
+    </tr>
+</template>
+
+<template id="templateFooter">
+    <tr>
+        <td><b>All orders - {{ count }}</b></td>
+        <td><b>{{ qty }}</b></td>
+        <td><b>{{ price.toLocaleString('en', { style: 'currency', currency: 'USD' }) }}</b></td>
+        <td><b style="color: red">{{ tax.toLocaleString('en', { style: 'currency', currency: 'USD' }) }}</b></td>
+        <td class="active"><b>{{ total.toLocaleString('en', { style: 'currency', currency: 'USD' }) }}</b></td>
+    </tr>
+</template>
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/node_modules/underscore/underscore.js"></script>
+<script src="/node_modules/moment/moment.js"></script>
+<script src="/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<script src="/node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ru.min.js"></script>
+<script src="/js/site.js"></script>
+</body>
+</html>
